@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-// import Button from './ButtonStiled';
 import Button from './../ButtonStiled/Button';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ListItemWrap = styled.li`
   display: flex;
@@ -16,24 +16,33 @@ const List = styled.ul`
   padding-left: ${p => p.theme.space[1]}px;
 `;
 
-const ContactList = ({ contacts, onDeleteContact }) => {
+const ContactList = () => {
+  const contacts = useSelector(state => state).contacts;
+
   return (
-    <List>
-      {contacts.map(contact => {
-        return (
-          <ListItemWrap key={contact.id}>
-            {contact.name}: {contact.number}
-            <Button
-              onClick={() => {
-                onDeleteContact(contact.id);
-              }}
-            >
-              Delete
-            </Button>
-          </ListItemWrap>
-        );
-      })}
-    </List>
+    <>
+      {contacts.length > 0 ? (
+        <List>
+          {contacts.map(contact => {
+            return (
+              <ListItemWrap key={contact.id}>
+                {contact.name}: {contact.number}
+                <Button
+                // onClick={() => {
+                //   onDeleteContact(contact.id);
+                // }
+                // }
+                >
+                  Delete
+                </Button>
+              </ListItemWrap>
+            );
+          })}
+        </List>
+      ) : (
+        <p>No any contact! add new</p>
+      )}
+    </>
   );
 };
 
