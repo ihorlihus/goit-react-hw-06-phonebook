@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contSlice';
 import styled from '@emotion/styled';
 import Button from 'components/ButtonStiled/Button';
@@ -25,6 +25,8 @@ const ContactFormWrap = styled.form`
 `;
 
 function SignUpForm() {
+  const contactsState = useSelector(state => state).contacts;
+
   const dispatch = useDispatch();
 
   const handleSubmit = event => {
@@ -33,7 +35,9 @@ function SignUpForm() {
     const name = form.elements.name.value;
     const number = form.elements.number.value;
 
-    dispatch(addContact({ name, number }));
+    contactsState.find(contact => contact.name.toLowerCase() === name)
+      ? alert(name + ' is already in contacts')
+      : dispatch(addContact({ name, number }));
     form.reset();
   };
 

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Button from './../ButtonStiled/Button';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { delContact } from '../../redux/contSlice';
 
 const ListItemWrap = styled.li`
   display: flex;
@@ -16,8 +17,12 @@ const List = styled.ul`
   padding-left: ${p => p.theme.space[1]}px;
 `;
 
-const ContactList = () => {
-  const contacts = useSelector(state => state).contacts;
+const ContactList = ({ contacts }) => {
+  const dispatch = useDispatch();
+
+  const handleDelContact = id => {
+    dispatch(delContact(id));
+  };
 
   return (
     <>
@@ -27,12 +32,7 @@ const ContactList = () => {
             return (
               <ListItemWrap key={contact.id}>
                 {contact.name}: {contact.number}
-                <Button
-                // onClick={() => {
-                //   onDeleteContact(contact.id);
-                // }
-                // }
-                >
+                <Button onClick={() => handleDelContact(contact.id)}>
                   Delete
                 </Button>
               </ListItemWrap>

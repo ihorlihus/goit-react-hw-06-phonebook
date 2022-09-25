@@ -15,12 +15,11 @@ export const contactsSlice = createSlice({
       });
     },
     delContact: (state, action) => {
-      state.filter(item => state.id !== action.payload);
+      return state.filter(item => item.id !== action.payload);
     },
   },
 });
 
 // Action creators are generated for each case reducer function
 export const { addContact, delContact } = contactsSlice.actions;
-
 export default contactsSlice.reducer;
