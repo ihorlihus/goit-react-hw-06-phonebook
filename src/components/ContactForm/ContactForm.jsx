@@ -1,32 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contSlice';
-import styled from '@emotion/styled';
+import { addContact, getContacts } from '../../redux/contSlice';
+
 import Button from 'components/ButtonStiled/Button';
-
-const ContactFormWrap = styled.form`
-  display: flex;
-  width: max-content;
-  flex-direction: column;
-  background-color: ${p => p.theme.colors.muted};
-  gap: ${props => props.theme.space[2]}px;
-  margin-left: ${p => p.theme.space[1]}px;
-  border: ${p => p.theme.space[1]}px solid ${p => p.theme.colors.black};
-  padding: ${p => p.theme.space[3]}px ${p => p.theme.space[3]}px;
-  border-radius: ${p => p.theme.space[2]}px;
-  margin-bottom: ${p => p.theme.space[2]}px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-    1px 4px 6px rgba(0, 0, 0, 0.16);
-
-  input:focus,
-  input:hover {
-    outline: none;
-    border: ${p => p.theme.space[1]}px solid ${p => p.theme.colors.primary};
-  }
-`;
+import { ContactFormWrap } from './ContactFirmStyled';
 
 function SignUpForm() {
-  const contactsState = useSelector(state => state).contacts;
-
+  const contactsState = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = event => {

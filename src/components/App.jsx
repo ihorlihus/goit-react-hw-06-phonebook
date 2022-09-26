@@ -3,9 +3,10 @@ import { addFilterValue } from '../redux/filterSlice';
 import ContactList from './ContactList';
 import SignUpForm from './ContactForm';
 import Filter from './Filter';
+import { getContacts } from 'redux/contSlice';
 
 export const App = () => {
-  const contacts = useSelector(state => state).contacts;
+  const contacts = useSelector(getContacts);
   const filterState = useSelector(state => state).filter.value;
   const dispatch = useDispatch();
 
